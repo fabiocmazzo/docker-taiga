@@ -4,6 +4,7 @@ ENV TAIGA_VERSION 3.4.1
 
 RUN apk update \
     && apk add --virtual build-dependencies \
+    && apk --no-cache add git \
     # Essentials
     gcc musl-dev libressl-dev \
     # Postgres python client (psycopg2) build dependency
@@ -42,6 +43,7 @@ WORKDIR /taiga_backend
 COPY --from=BUILDER /taiga_backend ./
 
 RUN apk add --no-cache \
+    git \
     # Pillow / PIL
     freetype jpeg libwebp tiff libpng lcms2 openjpeg zlib libxslt libxml2 libffi \
     # Postgres python client
